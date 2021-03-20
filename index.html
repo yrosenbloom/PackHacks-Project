@@ -1,8 +1,18 @@
+<!-- stress 
+Madison Murphy nCino
+Viet Pham nCino
+Tyler Irons Eastman
+
+-->
 <!DOCTYPE html>
 <html>
   <head>
     <title>Google Calendar API Quickstart</title>
     <meta charset="utf-8" />
+    <script async defer src="https://apis.google.com/js/api.js"
+    onload="this.onload=function(){};handleClientLoad()"
+    onreadystatechange="if (this.readyState === 'complete') this.onload()">
+  </script>
   </head>
   <body>
     <p>Google Calendar API Quickstart</p>
@@ -66,6 +76,7 @@
         if (isSignedIn) {
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
+          getCalendars();
           listUpcomingEvents();
         } else {
           authorizeButton.style.display = 'block';
@@ -98,6 +109,28 @@
         var textContent = document.createTextNode(message + '\n');
         pre.appendChild(textContent);
       }
+
+      /* API Call that gets a list of the users calendars
+      */
+     async function getCalendars()
+     {
+       console.log("Getting calendars...");
+      gapi.client.calendar.calendarList.list().execute(function (resp){
+        var calendars = resp.items;
+        console.log(calendars);
+      });
+      console.log("This is my user ID: " + temp.items)
+     }
+
+     function listCalendars()
+{
+     var request = gapi.client.calendar.calendarList.list();
+
+     request.execute(function(resp){
+             var calendars = resp.items;
+             console.log(calendars);
+     });
+} 
 
       /**
        * Print the summary and start datetime/date of the next ten events in
@@ -133,9 +166,9 @@
 
     </script>
 
-    <script async defer src="https://apis.google.com/js/api.js"
-      onload="this.onload=function(){};handleClientLoad()"
-      onreadystatechange="if (this.readyState === 'complete') this.onload()">
-    </script>
+    <!-- iframe src - You just have to get the src to format  -->
+    <iframe src="https://calendar.google.com/calendar/embed?src=jdbake15%40asu.edu&src=1tagd0qckrva2tfh6nucqf34sg0g4ckj%40import.calendar.google.com&ctz=America%2FPhoenix" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
   </body>
 </html>
+
+<!-- get Calendarlist. For each calendar, create a checkbox. Selected textboxes will be used later. the id of a calendar is an email, which can easily be formatted into the src tag for embedding the google caldendar on the site. -->
