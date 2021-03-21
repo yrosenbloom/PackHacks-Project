@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div class="form-popup" id="newForm">
+            <form action="/action_page.php" class="form-container">
+              <h1>Create New Assignment!</h1>
+          
+              <label for="assignment-name">Assignment Name</label>
+              <input type="text" id="assignment-name" name="assignment-name" required><br>
+          
+              <label for="class">Class</label>
+              <input type="text" id="class" name="class" required><br>
+
+              <label for="estimated-time">Estimated Time (between 1 and 5):</label>
+              <input type="number" id="estimated-time" name="estimated-time" min="1" max="5"><br>
+
+              <label for="due-date">Due Date</label>
+              <input type="date" id="due-date" name="due-date" required><br>
+          
+              <button type="submit" class="btn">Submit</button>
+              <button type="submit" class="submit" onclick="closeForm()">Close</button><br>
+            </form>
+          </div>
+
+    </body>
+</html>
