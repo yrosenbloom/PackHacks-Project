@@ -1,0 +1,25 @@
+.row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+/* Create two unequal columns that float next to each other */
+.column-left {
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 1;
+
+  width: 100%;
+  text-align: center;
+}
+
+.column-right {
+  grid-column-start: 2;
+}
+
+.text {
+    display: inline-block;
+    margin: 0 auto;
+}
