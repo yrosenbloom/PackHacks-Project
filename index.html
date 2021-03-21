@@ -2,7 +2,6 @@
 Madison Murphy nCino
 Viet Pham nCino
 Tyler Irons Eastman
-
 -->
 <!DOCTYPE html>
 <html>
@@ -13,9 +12,39 @@ Tyler Irons Eastman
     onload="this.onload=function(){};handleClientLoad()"
     onreadystatechange="if (this.readyState === 'complete') this.onload()">
   </script>
+
+<style>
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 10px;
+    padding: 10px;
+  }
+
+  /* Create two unequal columns that float next to each other */
+  .column-left {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+
+    width: 100%;
+    text-align: center;
+  }
+
+  .column-right {
+    grid-column-start: 2;
+  }
+
+  .text {
+      display: inline-block;
+      margin: 0 auto;
+  }
+  
+  </style>
+
   </head>
   <body>
-    <p>Google Calendar API Quickstart</p>
+    <p>Welcome to Study Scheduler</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" style="display: none;">Authorize</button>
@@ -24,6 +53,11 @@ Tyler Irons Eastman
     <pre id="content" style="white-space: pre-wrap;"></pre>
 
     <script type="text/javascript">
+    //Global Variables to be used later
+    var userCalendars = [];
+
+
+
       // Client ID and API key from the Developer Console
       var CLIENT_ID = '290575928168-t5ldr36ol80tmt61mug1k2c8s3t6c7f2.apps.googleusercontent.com';
       var API_KEY = 'AIzaSyCX2K1zhs3o_Dbj9-EVnELrbNohM98xCXM';
@@ -114,12 +148,23 @@ Tyler Irons Eastman
       */
      async function getCalendars()
      {
-       console.log("Getting calendars...");
-      gapi.client.calendar.calendarList.list().execute(function (resp){
-        var calendars = resp.items;
-        console.log(calendars);
-      });
-      console.log("This is my user ID: " + temp.items)
+      console.log("Getting calendars...");
+      gapi.client.calendar.calendarList.list().then(promise => 
+      {
+        for(let i = 0; i < promise.result.items.length; i++)
+          userCalendars.push(promise.result.items[i])
+
+          testFunction();
+      }
+        )
+      .catch(e => console.log(e))
+
+
+     }
+
+     function testFunction()
+     {
+      console.log("there are " + userCalendars.length + " calendars in the array")
      }
 
      function listCalendars()
@@ -166,8 +211,46 @@ Tyler Irons Eastman
 
     </script>
 
-    <!-- iframe src - You just have to get the src to format  -->
-    <iframe src="https://calendar.google.com/calendar/embed?src=jdbake15%40asu.edu&src=1tagd0qckrva2tfh6nucqf34sg0g4ckj%40import.calendar.google.com&ctz=America%2FPhoenix" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    <div class="row">
+
+      <div class="column-left" style="background-color: #aaa;">
+
+        <div class="text" style="background-color: #aaa;">
+            <h2> Select Calendar(s)</h2>
+            <form action="/action_page.php" method="get">
+
+              <!-- The names, values, and labels are just placeholders, they will needed to be
+                  inputted as the different calendars are read from the user -->
+              <input type="checkbox" name="Calendar1" value="">
+              <label for="Calendar1"> Calendar 1</label><br>
+
+              <input type="checkbox" name="Calendar2" value="">
+              <label for="Calendar2"> Calendar 2</label><br>
+
+              <input type="checkbox" name="Calendar3" value="">
+              <label for="Calendar3"> Calendar 3</label><br><br>
+
+              <input type="checkbox" name="Calendar4" value="">
+              <label for="Calendar4"> Calendar 4</label><br><br>
+
+              <input type="checkbox" name="Calendar5" value="">
+              <label for="Calendar5"> Calendar 5</label><br><br>
+
+              <input type="submit" value="Submit">
+            </form>
+        </div>
+        
+      </div>
+
+      <div class="column-right" style="background-color: #ccc;">
+        <!-- iframe src - You just have to get the src to format  -->
+        <iframe src="https://calendar.google.com/calendar/embed?src=jdbake15%40asu.edu&src=1tagd0qckrva2tfh6nucqf34sg0g4ckj%40import.calendar.google.com&ctz=America%2FPhoenix" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+      </div>
+    </div>  
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   </body>
 </html>
 
