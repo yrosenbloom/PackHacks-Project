@@ -13,38 +13,40 @@ Tyler Irons Eastman
     onreadystatechange="if (this.readyState === 'complete') this.onload()">
   </script>
 
-<style>
-  .row {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-gap: 10px;
-    padding: 10px;
-  }
+  <style>
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      grid-gap: 10px;
+      padding: 10px;
+    }
 
-  /* Create two unequal columns that float next to each other */
-  .column-left {
-    grid-column-start: 1;
-    grid-column-end: 1;
-    grid-row-start: 1;
+    /* Create two unequal columns that float next to each other */
+    .column-left {
+      grid-column-start: 1;
+      grid-column-end: 1;
+      grid-row-start: 1;
 
-    width: 100%;
-    text-align: center;
-  }
+      width: 100%;
+      text-align: center;
+    }
 
-  .column-right {
-    grid-column-start: 2;
-  }
+    .column-right {
+      grid-column-start: 2;
+    }
 
-  .text {
-      display: inline-block;
-      margin: 0 auto;
-  }
-  
+    .text {
+        display: inline-block;
+        margin: 0 auto;
+    }
+    
   </style>
 
   </head>
   <body>
-    <p>Welcome to Study Scheduler</p>
+    <center>
+      <h2>Welcome to Study Scheduler</h2>
+    </center>
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" style="display: none;">Authorize</button>
@@ -216,7 +218,7 @@ Tyler Irons Eastman
       <div class="column-left" style="background-color: #aaa;">
 
         <div class="text" style="background-color: #aaa;">
-            <h2> Select Calendar(s)</h2>
+            <h3> Select Calendar(s)</h3>
             <form action="/action_page.php" method="get">
 
               <!-- The names, values, and labels are just placeholders, they will needed to be
@@ -228,21 +230,42 @@ Tyler Irons Eastman
               <label for="Calendar2"> Calendar 2</label><br>
 
               <input type="checkbox" name="Calendar3" value="">
-              <label for="Calendar3"> Calendar 3</label><br><br>
+              <label for="Calendar3"> Calendar 3</label><br>
 
               <input type="checkbox" name="Calendar4" value="">
-              <label for="Calendar4"> Calendar 4</label><br><br>
+              <label for="Calendar4"> Calendar 4</label><br>
 
               <input type="checkbox" name="Calendar5" value="">
-              <label for="Calendar5"> Calendar 5</label><br><br>
+              <label for="Calendar5"> Calendar 5</label><br>
 
               <input type="submit" value="Submit">
+
+              <input type="new-assignment" value="New Assignment">
+            </form><br><br><br><br>
+
+            <form action="/action_page.php" class="form-container">
+              <h3>Create New Assignment!</h3>
+          
+              <label for="assignment-name">Assignment Name</label>
+              <input type="text" id="assignment-name" name="assignment-name" required><br>
+          
+              <label for="class">Class</label>
+              <input type="text" id="class" name="class" required><br>
+
+              <label for="estimated-time">Estimated Time (between 1 and 5):</label>
+              <input type="number" id="estimated-time" name="estimated-time" min="1" max="5"><br>
+
+              <label for="days-till-due">Days Until Due Date (between 1 and 5)</label>
+              <input type="number" id="days-till-due" name="days-till-due" min="1" max="5" required><br>
+          
+              <button type="submit" class="btn">Submit</button>
+              <button type="submit" class="submit" onclick="closeForm()">Close</button><br>
             </form>
         </div>
         
       </div>
 
-      <div class="column-right" style="background-color: #ccc;">
+      <div class="column-right" style="background-color: #aaa;">
         <!-- iframe src - You just have to get the src to format  -->
         <iframe src="https://calendar.google.com/calendar/embed?src=jdbake15%40asu.edu&src=1tagd0qckrva2tfh6nucqf34sg0g4ckj%40import.calendar.google.com&ctz=America%2FPhoenix" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
       </div>
